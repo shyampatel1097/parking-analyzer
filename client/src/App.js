@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
 import { Camera, X, Upload, Loader } from 'lucide-react';
-import { Alert } from '@/components/ui/alert';
 
 const ParkingAnalyzer = () => {
   const [images, setImages] = useState([]);
