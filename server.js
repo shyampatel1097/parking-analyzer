@@ -1,4 +1,3 @@
-// server.js
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -29,15 +28,7 @@ app.post('/api/analyze', async (req, res) => {
                 1. Whether parking is currently allowed (considering current time and day)
                 2. Any time restrictions or limits
                 3. Special conditions or exceptions
-                4. Payment requirements if any
-                
-                Provide your response in JSON format with the following structure:
-                {
-                    "canPark": boolean,
-                    "explanation": "clear explanation of the decision",
-                    "restrictions": ["list", "of", "restrictions"],
-                    "timeLimit": optional_integer_minutes
-                }`
+                4. Payment requirements if any`
             },
             {
                 "role": "user",
@@ -75,13 +66,7 @@ app.post('/api/analyze', async (req, res) => {
         const data = await response.json();
         const content = data.choices[0].message.content;
         
-        // Parse the JSON from the response content
-        const jsonMatch = content.match(/\{[\s\S]*\}/);
-        if (!jsonMatch) {
-            throw new Error('Could not parse JSON from response');
-        }
-        
-        const analysis = JSON.parse(jsonMatch[0]);
+        const analysis = JSON.parse(content);
         res.json(analysis);
 
     } catch (error) {
